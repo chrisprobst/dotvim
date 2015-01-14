@@ -52,5 +52,5 @@ filetype plugin indent on    " required
 set background=dark
 colorscheme base16-ocean
 
-	" Neocomplete
+" Neocomplete
 let g:neocomplete#enable_at_startup = 1
