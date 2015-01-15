@@ -25,11 +25,11 @@ Plugin 'gmarik/Vundle.vim'
 " Nice background theme
 Plugin 'chriskempson/base16-vim'
 
+" YCM autocompletion
+Plugin 'Valloric/YouCompleteMe'
+
 " Golang support
 Plugin 'fatih/vim-go'
-
-" Neocomplete
-Plugin 'Shougo/neocomplete.vim'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
@@ -58,9 +58,6 @@ filetype plugin indent on    " required
 " Set theme
 set background=dark
 colorscheme base16-ocean
-
-" Neocomplete
-let g:neocomplete#enable_at_startup = 1
 
 " Used for ultiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
