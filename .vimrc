@@ -37,6 +37,8 @@ Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 
+" Auto pairs
+Plugin 'Raimondi/delimitMate'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -70,3 +72,11 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" We do not need a preview window for completions
+:set completeopt=menuone
+
+" Define tab settings
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
