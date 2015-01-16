@@ -1,8 +1,6 @@
 " be iMproved, required
 set nocompatible
 
-
-
 """"""""""""""""
 """ VISUAL STUFF
 """"""""""""""""
@@ -37,6 +35,9 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+
+" For invoking background tasks
+Plugin 'Shougo/vimproc.vim'
 
 " Nice background theme
 Plugin 'chriskempson/base16-vim'
@@ -114,8 +115,32 @@ set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 
 " [UNITE]
-" Map c-p to open fuzzy search for files, buffers and lines
-nmap <c-p> :Unite -start-insert file buffer line<CR>
+" Setup unite
+let g:unite_enable_start_insert = 1
+let g:unite_force_overwrite_statusline = 0
+let g:unite_winheight = 10
+
+" Bind unite to keys
+nnoremap <C-P> :<C-u>Unite -buffer-name=files -start-insert buffer file line<cr>
+
+" The function, which sets up unite
+function! s:unite_settings()
+	" If I ever user super tab
+	let b:SuperTabDisabled=1
+
+	" Make default mapping
+	imap <buffer> <C-j> <Plug>(unite_select_next_line)
+	imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+	imap <silent><buffer><expr> <C-x> unite#do_action('split')
+	imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+	imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
+
+	nmap <buffer> <ESC> <Plug>(unite_exit)
+endfunction
+
+" Make sure unite is configured correctly when starting
+autocmd FileType unite call s:unite_settings()
+
 
 " [TAGBAR]
 " Toggle tagbar on F6
@@ -129,10 +154,18 @@ nmap <F6> :TagbarToggle<CR>
 " Toggle search, _ counts for /. Not sure why.
 nnoremap <c-_> :set hlsearch!<CR>
 
+" Make backspace behave sanely
+set backspace=indent,eol,start
 
-""""""""""""""""""
-""" CUSTOM KEYMAPS
-""""""""""""""""""
+" Remap pane navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+""""""""""""""""
+""" CUSTOM STUFF
+""""""""""""""""
 
 " Automatically remove trailing whitespaces
 function! TrimWhiteSpace()
