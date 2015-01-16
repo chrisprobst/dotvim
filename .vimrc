@@ -164,6 +164,10 @@ nnoremap <C-H> <C-W><C-H>
 """ CUSTOM STUFF
 """"""""""""""""
 
+" Make sure new panes are created right and bottom
+set splitbelow
+set splitright
+
 " Automatically remove trailing whitespaces
 function! TrimWhiteSpace()
 	%s/\s\+$//e
