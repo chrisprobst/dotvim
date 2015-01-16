@@ -6,9 +6,18 @@ syntax enable
 set ruler
 set number
 set title
+set hlsearch
 
 " Key settings
 set backspace=indent,eol,start
+
+" We do not need a preview window for completions
+:set completeopt=menuone
+
+" Define tab settings
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 
 " Required for vundle
 filetype off
@@ -39,6 +48,18 @@ Plugin 'honza/vim-snippets'
 
 " Auto pairs
 Plugin 'Raimondi/delimitMate'
+
+" A cool powerline feature for vim
+Plugin 'bling/vim-airline'
+
+" Fuzzy finder
+Plugin 'kien/ctrlp.vim'
+
+" The tagbar plugin
+Plugin 'majutsushi/tagbar'
+
+" A nice git wrapper
+Plugin 'tpope/vim-fugitive'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -73,10 +94,16 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" We do not need a preview window for completions
-:set completeopt=menuone
+" Enable powerline font
+let g:airline_powerline_fonts = 1
 
-" Define tab settings
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+" Make sure, the status line is always visible
+set laststatus=2
+let g:airline#extensions#tabline#enabled = 1
+
+" Setup ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" Toggle tagbar
+nmap <F6> :TagbarToggle<CR>
