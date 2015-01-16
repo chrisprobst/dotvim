@@ -1,15 +1,17 @@
 " be iMproved, required
 set nocompatible
 
-" Visual stuff
+
+
+""""""""""""""""
+""" VISUAL STUFF
+""""""""""""""""
+
 syntax enable
 set ruler
 set number
 set title
 set hlsearch
-
-" Key settings
-set backspace=indent,eol,start
 
 " We do not need a preview window for completions
 :set completeopt=menuone
@@ -18,6 +20,11 @@ set backspace=indent,eol,start
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+
+
+""""""""""""""""
+""" VUNDLE STUFF
+""""""""""""""""
 
 " Required for vundle
 filetype off
@@ -53,12 +60,12 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'bling/vim-airline'
 
 " Fuzzy finder
-Plugin 'kien/ctrlp.vim'
+Plugin 'Shougo/unite.vim'
 
 " The tagbar plugin
 Plugin 'majutsushi/tagbar'
 
-" A nice git wrapper
+" A nice glet g:ctrlp_map = it wrapper
 Plugin 'tpope/vim-fugitive'
 
 " All of your Plugins must be added before the following line
@@ -75,35 +82,68 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-"
-"
 
-" Set theme
+
+"""""""""""""""""
+""" SETUP PLUGINS
+"""""""""""""""""
+
+" [THEME]
 set background=dark
 colorscheme base16-ocean
 
-" Setup YCM
+" [YCM]
+" Make sure ycm does iterate on TAB
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
-" better key bindings for UltiSnipsExpandTrigger
+" [ULTISNIP]
+" Make snippet insertion on tab
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
+" [AIRLINE]
 " Enable powerline font
 let g:airline_powerline_fonts = 1
 
 " Make sure, the status line is always visible
 set laststatus=2
+
+" Show tabs in the top
 let g:airline#extensions#tabline#enabled = 1
 
-" Setup ctrlp
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+" [UNITE]
+" Map c-p to open fuzzy search for files, buffers and lines
+nmap <c-p> :Unite -start-insert file buffer line<CR>
 
-" Toggle tagbar
+" [TAGBAR]
+" Toggle tagbar on F6
 nmap <F6> :TagbarToggle<CR>
+
+
+""""""""""""""""""
+""" CUSTOM KEYMAPS
+""""""""""""""""""
+
+" Toggle search, _ counts for /. Not sure why.
+nnoremap <c-_> :set hlsearch!<CR>
+
+
+""""""""""""""""""
+""" CUSTOM KEYMAPS
+""""""""""""""""""
+
+" Show whitespaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+" Automatically remove trailing whitespaces
+function! TrimWhiteSpace()
+	%s/\s\+$//e
+endfunction
+autocmd BufWritePre * :call TrimWhiteSpace()
