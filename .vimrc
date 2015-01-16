@@ -36,9 +36,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" For invoking background tasks
-Plugin 'Shougo/vimproc.vim'
-
 " Nice background theme
 Plugin 'chriskempson/base16-vim'
 
