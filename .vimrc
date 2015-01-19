@@ -66,6 +66,9 @@ Plugin 'majutsushi/tagbar'
 " A nice glet g:ctrlp_map = it wrapper
 Plugin 'tpope/vim-fugitive'
 
+" A file explorer
+Plugin 'Shougo/vimfiler.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -143,6 +146,9 @@ autocmd FileType unite call s:unite_settings()
 " Toggle tagbar on F6
 nmap <F6> :TagbarToggle<CR>
 
+" [VIMFILER]
+" Set vimfiler as default file browser
+:let g:vimfiler_as_default_explorer = 1
 
 """"""""""""""""""
 """ CUSTOM KEYMAPS
